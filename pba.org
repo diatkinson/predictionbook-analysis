@@ -1,0 +1,114 @@
+* Basic statistics
+- # of predictions
+- # of comments, credences, past-due predictions, judged predictions (w/ right and wrong #s)
+- avg length of a comment
+- how many predictions are private
+* Replicate brier score calculations
+* User stats
+- % of users who have made a prediction
+- brier score distribution
+- distribution of # predictions per user (density chart)
+- distribution of # credences per user (density chart)
+- distribution of # comments per user (density chart)
+* Other things
+word cloud of predictions
+plot how well calibrated credences were against:
+  - the number of other credences given at the time the credence was reported
+  - the time to prediction resolution at the time the credence was reported
+How has the site grown? Plot ids and plot number of public predictions over time
+Identify super-forecasters
+
+cluster predictions
+
+how has the site-wide mse changed over time?
+how does the average user's mse change over time? Calibration? (Are their later predictions better calibrated?)
+* Interesting
+feature based:
+  - presence of "$", pound symbol, etc
+  - presence of "I", "we"
+  - negative verse positive: "will" verse "won't", "will not", etc
+    - might be better to just treat anything not negative as positive. Negative: presence of "no", "not", "won't"
+
+
+compare performance on us presidential/brexit/etc to 1) good judgement project, 2) betting markets
+
+Relevant features probably include a) the variance in predictions
+                                   b) the number of predictions
+* Can we predict which predictions are difficult?
+How do we formalize difficulty? Biggest brier score loss. (i.e., MSE)
+Might be worth restricting ourselves to predictions with >n credences, from >m different users.
+
+
+* Main task
+- NBayes baseline (or try log reg)
+- word vectors
+- Given the page, predict its outcome
+- Things to consider:
+  - at what point in the prediction's lifecycle do we get it?
+    - maybe halfway through?
+- Prediction strategies
+  - 
+* Writeup
+** What's prediction book?
+What it is (word cloud), theory behind it, do users improve?, site activity
+
+
+** What's hard to predict?
+*** What does it mean for a prediction to be difficult?
+calibration is basically, are you a biased estimator?
+*** Describe features
+I came up with 10 (or whatever) features. Most of which turned out to be useless!
+
+For each: intuition, how is it calculated, example predictions, count, correlations
+**** Money
+**** etc
+** How well can we predict?
+Another, last question: can we construct a model that predicts well? Yes! For some value of well.
+Summary of findings.
+
+Which measure: calibration isn't fair, since we don't get to choose which events we give credences to.
+And if you can choose, you can make your calibration arbitrarily close to perfect.
+\footnote{Imagine i have the following calibration graph. [graph] I could...}
+
+Brier score: TODO can you compare across different events? is it sensitive to variance?
+Ideally, we'd train our model, and then compare it to each user on only those events the user forecasted.
+But we'd have to either train it on very little data, or evaluate it on very little data.
+
+Explain task
+
+* Tasks
+** Intro
+*** Word cloud
+*** How does the average user's calibration change over time?
+*** How has site activity changed over time?
+*** Writeup
+** DiffInvest
+*** Decide on standard of difficulty
+*** Come up with features
+*** For each feature, plot versus difficulty
+*** Writeup
+** PredBot
+*** Decide on metric
+calibration? brier score?
+*** Decide on task
+For each prediction, we choose a point in its lifecycle. We could choose:
+  - randomly: this gives us an advantage, since most predictions get most of their credences early in their lifecycle ([graph])
+  - halfway through: no. this is an even bigger advantage, because at no point do we have to go in with no credences.
+Result: RANDOM
+*** Model: just the average credence
+*** Model: average + hardcoded features from DiffInvest
+*** Model: average + features + BERT
+*** Writeup
+Task: Make sure to report the percentage of times we're going in blind
+Results: how does model performance relate to (at least some of) the usual metrics. I.e., replicate DiffInvest for our models. And report at least some of it.
+** Conclusion
+*** Writeup
+** Presentation
+*** Fork and integrate joel grus's site
+*** Write About page
+*** Promote
+Ask mom, dad, k, zach (when he get's a chance) for comments
+NLP+CSS
+Raf
+Hacker News
+r/SSC
